@@ -6,3 +6,5 @@ langchain_community
 ddgs
 rich
 langgraph
+langgraph-checkpoint-sqlite
+aiosqlite
