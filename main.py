@@ -21,11 +21,12 @@ async def main():
         system_prompt=SYSTEM_PROMPT
     )
 
-    question = input("Please enter your question: ")
-
-    response = agent.invoke({"messages": [{"role": "user", "content": question}]})
-
-    print(response["messages"][-1].content[0]["text"])
+    while True:
+        human_question = input("Please enter your question: ")
+        if human_question == "exit":
+            break
+        response = agent.invoke({"messages": [{"role": "user", "content": human_question}]})
+        print(response["messages"][-1].content[0]["text"])
 
 if __name__=="__main__":
     asyncio.run(main())
