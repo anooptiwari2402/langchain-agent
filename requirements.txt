@@ -8,3 +8,4 @@ rich
 langgraph
 langgraph-checkpoint-sqlite
 aiosqlite
+pandas

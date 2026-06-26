@@ -9,7 +9,7 @@ from pathlib import Path
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", message=".*schema.*")
 
-from config import WORKSPACE_DIR
+from config import WORKSPACE_DIR, RECURSION_LIMIT
 from agent_factory import AgentManager
 import ui
 
@@ -185,7 +185,10 @@ async def main():
 
     # 3. Generate initial session ID based on current timestamp
     session_id = f"research_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-    config = {"configurable": {"thread_id": session_id}}
+    config = {
+        "configurable": {"thread_id": session_id},
+        "recursion_limit": RECURSION_LIMIT
+    }
 
     ui.console.print(f"🔄 Active Conversation Session: [bold cyan]{session_id}[/bold cyan]\n")
 
@@ -248,7 +251,10 @@ async def main():
                     ui.console.print(f"[bold red]Error:[/bold red] Session '{target_id}' not found in SQLite.")
                     continue
                 session_id = target_id
-                config = {"configurable": {"thread_id": session_id}}
+                config = {
+                    "configurable": {"thread_id": session_id},
+                    "recursion_limit": RECURSION_LIMIT
+                }
                 ui.console.print(f"[bold green]✓ Session Switched![/bold green] Currently resuming: [bold cyan]{session_id}[/bold cyan]")
                 messages = await get_session_messages(agent_manager.agent, config)
                 ui.display_history(messages)
@@ -265,7 +271,10 @@ async def main():
                     # If current session deleted, generate a new one
                     if target_id == session_id:
                         session_id = f"research_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-                        config = {"configurable": {"thread_id": session_id}}
+                        config = {
+                            "configurable": {"thread_id": session_id},
+                            "recursion_limit": RECURSION_LIMIT
+                        }
                         ui.console.print(f"🔄 Started new conversation session: [bold cyan]{session_id}[/bold cyan]")
                 else:
                     ui.console.print(f"[bold red]Failed to delete session '{target_id}'.[/bold red]")

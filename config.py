@@ -14,6 +14,7 @@ DB_PATH = PROJECT_ROOT / "research_history.db"
 
 # LLM Model Configuration
 MODEL_NAME = os.getenv("MODEL_NAME", "google_genai:gemini-3.5-flash")
+RECURSION_LIMIT = int(os.getenv("RECURSION_LIMIT", "100"))
 
 # Security configurations
 FORBIDDEN_TOKENS = ["sudo", "shutdown", "reboot", "mkfs", "dd", "format", "chown", "chmod", "mv"]
