@@ -1,0 +1,6 @@
+langchain
+langchain-google-genai
+python-dotenv
+langchain-mcp-adapters
+langchain_community
+ddgs
